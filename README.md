@@ -1,0 +1,2 @@
+# veriTabani
+veri tabani odev
