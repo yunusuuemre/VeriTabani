@@ -1,19 +1,4 @@
-<?php
-/*
-include("baglanti.php");
-session_start();
-$ad = @$_POST["ad"];
-$sifre = @$_POST["sifre"];
-$sql = "SELECT * FROM yonetici WHERE yoneticiKullaniciAdi='$ad' AND yoneticiSifre='$sifre'";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    $_SESSION['ad'] = $ad;
-    $sql2 = "INSERT INTO giris (girisTarih,yonetici_id) VALUES(NOW(), (SELECT dershane.yonetici.yoneticiId FROM yonetici WHERE(yoneticiKullaniciAdi = '$ad')))";
-    $conn->query($sql2);
-    // Gİriş YAPAN KULLANICI ADI YAZICAK GİRİS TABLOSUNDA VE GİRİŞ YAPILAN TARİHLE SAAT YAZACAK
-    header("Location: AnaSayfa.php");
-}*/
-?>
+
 <!DOCTYPE html>
 
 <head>
@@ -28,7 +13,7 @@ if ($result->num_rows > 0) {
     
    <h1 style="margin-top: 80px; margin-left:120px; font-family: 'Times New Roman', Times, serif;">Kullanıcı Girişi</h1>
 
-  <form style="border-radius: 30px; width: 30%; display: inline-block; margin-top: 50px; margin-left: 30px; background-color: #289944;" action="giris.php" method="post">
+  <form style="border-radius: 30px; width: 30%; display: inline-block; margin-top: 50px; margin-left: 30px; background-color: #289944;" action="girisIslemleri.php" method="post">
     <div class="form-group" style="margin-top:5% ; margin-left:30px;">
       <label for="exampleInputEmail1"  style="font-size: xx-large;">Kullanıcı Adı</label>
       <input type="text" class="form-control"  id="exampleInputEmail1" name="ad" style="width: 90%;" aria-describedby="text">

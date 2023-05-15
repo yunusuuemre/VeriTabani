@@ -37,38 +37,13 @@ CREATE TABLE ders_programi (
   id INT(11) NOT NULL AUTO_INCREMENT,
   ders_id INT(11) NOT NULL,
   sinif_id INT(11) NOT NULL,
-  baslangic_saati TIME NOT NULL,
-  bitis_saati TIME NOT NULL,
+  gun DATE NOT NULL,
+  saat TIME NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (ders_id) REFERENCES dersler(id),
   FOREIGN KEY (sinif_id) REFERENCES siniflar(id)
 );
-CREATE TABLE ders_kayit (
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  ogrenci_id INT(11) NOT NULL,
-  ders_id INT(11) NOT NULL,
-  notu INT(11) DEFAULT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (ogrenci_id) REFERENCES ogrenciler(id),
-  FOREIGN KEY (ders_id) REFERENCES dersler(id)
-);
-CREATE TABLE ders_odevleri (
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  ders_id INT(11) NOT NULL,
-  aciklama TEXT NOT NULL,
-  teslim_tarihi DATE NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (ders_id) REFERENCES dersler(id)
-);
-CREATE TABLE devamsizlik (
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  ogrenci_id INT(11) NOT NULL,
-  ders_id INT(11) NOT NULL,
-  devamsizlik_tarihi DATE NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (ogrenci_id) REFERENCES ogrenciler(id),
-  FOREIGN KEY (ders_id) REFERENCES dersler(id)
-);
+
 CREATE TABLE veliler (
 id INT(11) NOT NULL AUTO_INCREMENT,
 ad VARCHAR(255) NOT NULL,
@@ -82,25 +57,20 @@ PRIMARY KEY (id)
 CREATE TABLE odemeler (
 id INT(11) NOT NULL AUTO_INCREMENT,
 ogrenci_id INT(11) NOT NULL,
-ders_id INT(11) NOT NULL,
-ucret INT(11) NOT NULL,
-odeme_tarihi DATE NOT NULL,
-odeme_yapan VARCHAR(255) NOT NULL,
-odeme_yontemi VARCHAR(255) DEFAULT NULL,
+toplamOdenecek INT NOT NULL,
+kalanOdeme INT NOT NULL,
 PRIMARY KEY (id),
-FOREIGN KEY (ogrenci_id) REFERENCES ogrenciler(id),
-FOREIGN KEY (ders_id) REFERENCES dersler(id)
+FOREIGN KEY (ogrenci_id) REFERENCES ogrenciler(id)
 );
 CREATE TABLE ucretler (
 id INT(11) NOT NULL AUTO_INCREMENT,
 ders_id INT(11) NOT NULL,
 ucret INT(11) NOT NULL,
-diger_maliyetler INT(11) DEFAULT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (ders_id) REFERENCES dersler(id)
 );
 CREATE TABLE Yonetici(
-	yoneticiId int NOT NULL PRIMARY KEY,
+	yoneticiId int NOT NULL PRIMARY KEY auto_increment,
     yoneticiAd varchar(60) NOT NULL,
     yoneticiSoyad varchar(60) NOT NULL,
     yoneticiKullaniciAdi varchar(60) NOT NULL,
@@ -109,7 +79,7 @@ CREATE TABLE Yonetici(
 );
 
 CREATE TABLE Giris(
-	girisId int NOT NULL PRIMARY KEY ,
+	girisId int NOT NULL PRIMARY KEY auto_increment ,
     girisTarih date NOT NULL,
     yonetici_id int NOT NULL,
     FOREIGN KEY(yonetici_id) REFERENCES Yonetici(yoneticiId)
@@ -124,8 +94,21 @@ VALUES('Emre','Akyay',393,'Mezun','Tokat Turhal ...','03432436789'),('Yusuf','Ka
 ('Furkan','Kaya',101,'12','Kocaeli İzmit ...','05458921132'),('Eda','Nur',610,'Mezun','Mardin Dargeçit ...','04061921321');
 
 INSERT INTO ogretmenler(ad,soyad,ogretmen_no,ders) 
-VALUES('Yasin','Goban','03432431023','Türkçe'),('Emre','Akyay','03562412313','Oyun Geliştirme'),('Eda','Nur','03241231351','İngilizce'),('Ayşe','Samaroğlu','08765432104','Matematik');
+VALUES('Yasin','Goban','03432431023','Türkçe'),('Emre','Akyay','03562412313','Fizik'),('Faruk','Hacı','03213240965','Kimya'),
+('Eda','Nur','03241231351','İngilizce'),('Ayşe','Samaroğlu','08765432104','Matematik'),('Ahmet','Gözlük','098765432132','Biyoloji');
 
 INSERT INTO dersler(ders_adi,ders_kodu) 
-VALUES('Türkçe','tr'),('Matematik','mat'),('Oyun Geliştirme','oyg'),('İngilizce','ing');
+VALUES('Türkçe','tr'),('Matematik','mat'),('Fizik','fiz'),('İngilizce','ing'),('Kimya','kim'),('Matematik','mat'),('Biyoloji','biy');
 
+INSERT INTO siniflar (sinif_adi,sinif_no,ogretmen_id)
+VALUES('Türkçe','1',1),('Fizik','2',2),('Kimya','3',3),('İngilizce','4',4),('Matematik','5',5),('Biyoloji','6',6);
+
+INSERT INTO veliler(ad,soyad,telefon,e_posta,meslek,cocuk)
+VALUES('Hikari','Akyay','03245674321','hikakri@gmail.com','Öğretmen','Emre'),
+('Ahmet','Kaya','01320314521','a_gaya@gmail.com','Şarkıcı','Yusuf'),
+('Fatma','Nur','09872139471','nur_fat1@gmail.com','Asker','Eda'),
+('Faruk','Samaroğlu','09182039412','samarFaruklu@gmail.com','ayrancı','Ayşe'),
+('Göz','Gözlük','01213912341','guzlukgz@gmail.com','gözlükçü','Ahmet');
+
+INSERT INTO odemeler(ogrenci_id,toplamOdenecek,kalanOdeme)
+VALUES(1,8000,8000),(2,8500,4000),(3,7000,6500),(4,6500,6000);

@@ -26,22 +26,34 @@ if ($result->num_rows > 0) {
   </head>
 <body style="background-color: gray;">
     
-   <h1 style="margin-top: 80px; margin-left:120px; font-family: 'Times New Roman', Times, serif;">Kullanıcı Girişi</h1>
+   <h1 style="margin-top: 80px; margin-left:20px; font-family: 'Times New Roman', Times, serif;">Yeni Yönetici Bilgilerini Giriniz</h1>
 
-  <form style="border-radius: 30px; width: 30%; display: inline-block; margin-top: 50px; margin-left: 30px; background-color: #289944;" action="giris.php" method="post">
+  <form style="border-radius: 30px; width: 30%; display: inline-block; margin-top: 50px; margin-left: 30px; background-color: #289944;" action="yoneticiPanelIslemleri.php" method="post">
+    <div class="form-group" style="margin-top:5% ; margin-left:30px;">
+      <label for="exampleInputEmail1"  style="font-size: xx-large;">Yönetici Adı</label>
+      <input type="text" class="form-control"  id="exampleInputEmail1" name="yonAd" style="width: 90%;" aria-describedby="text">
+    </div>
+    <div class="form-group" style="margin-top:5% ; margin-left:30px;">
+      <label for="exampleInputEmail1"  style="font-size: xx-large;">Yönetici Soyadı</label>
+      <input type="text" class="form-control"  id="exampleInputEmail1" name="yonSoyad" style="width: 90%;" aria-describedby="text">
+    </div>
     <div class="form-group" style="margin-top:5% ; margin-left:30px;">
       <label for="exampleInputEmail1"  style="font-size: xx-large;">Kullanıcı Adı</label>
-      <input type="text" class="form-control"  id="exampleInputEmail1" name="ad" style="width: 90%;" aria-describedby="text">
+      <input type="text" class="form-control"  id="exampleInputEmail1" name="kulAd" style="width: 90%;" aria-describedby="text">
     </div>
     <div class="form-group" style="margin-left: 30px; ">
       <label for="exampleInputPassword1" style="font-size: xx-large;">Şifre</label>
-      <input type="password" class="form-control" name="sifre" style="width: 90%;" id="exampleInputPassword1">
+      <input type="password" class="form-control" name="kulSifre" style="width: 90%;" id="exampleInputPassword1">
     </div>
-    <button type="submit" class="btn btn-danger" style="margin-left: 30px; margin-bottom: 10px ; font-size: x-large; border-radius: 30px;">Giriş Yap</button>
+    <div class="form-group" style="margin-top:5% ; margin-left:30px;">
+      <label for="exampleInputEmail1"  style="font-size: xx-large;">Yönetici E-Posta</label>
+      <input type="text" class="form-control"  id="exampleInputEmail1" name="yonEposta" style="width: 90%;" aria-describedby="text">
+    </div>
+    <button type="submit" class="btn btn-danger" style="margin-left: 30px; margin-bottom: 10px ; font-size: x-large; border-radius: 30px;">Yönetici Ekle</button>
   </form>
 
 
-  <img src="logoKou.png" class="img-fluid" alt="logo" style="width: 20%; height: 20%; margin-bottom: 260px; margin-left: 100px;  ">
+  <img src="logoKou.png" class="img-fluid" alt="logo" style="width: 20%; height: 20%; margin-bottom: 600px; margin-left: 100px;  ">
 
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

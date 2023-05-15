@@ -21,7 +21,6 @@
           <div class="dropdown-menu">
             <a class="dropdown-item" href="ogrenciListesi.php">Öğrencileri Listele</a>
             <a class="dropdown-item" href="ogrenciEkleme.php">Öğrenci Ekle</a>
-            <a class="dropdown-item" href="ogrenciArama.php">Öğrenci Ara</a>
             <a class="dropdown-item" href="ogrenciSilme.php">Öğrenci Sil</a>
           </div>
        
@@ -32,7 +31,6 @@
           <div class="dropdown-menu">
             <a class="dropdown-item" href="ogretmenListesi.php">Öğretmenleri Listele</a>
             <a class="dropdown-item" href="ogretmenEkleme.php">Öğretmen Ekle</a>
-            <a class="dropdown-item" href="ogretmenArama.php">Öğretmen Ara</a>
             <a class="dropdown-item" href="ogretmenSilme.php">Öğretmen Sil</a>
           </div>
           <li class="nav-item dropdown">
@@ -40,16 +38,20 @@
               Veli İşlemleri
             </a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="ogretmenListesi.php">Velileri Listele</a>
-            <a class="dropdown-item" href="ogretmenArama.php">Veli Ara</a>
-            <a class="dropdown-item" href="ogretmenSilme.php">Veli Sil</a>
+            <a class="dropdown-item" href="veliListesi.php">Velileri Listele</a>
+            <a class="dropdown-item" href="veliEkle.php">Veli Ekle</a>
+            <a class="dropdown-item" href="veliSilme.php">Veli Sil</a>
           </div>
          
+         
+          <li class="nav-item">
+            <a class="nav-link "  href="sinifBilgileri.php" >Sınıf Bilgileri</a>
+          </li>
  
        
          
           <li class="nav-item">
-            <a class="nav-link " style="color: red;" href="giris.php" >Yonetici Ekleme</a>
+            <a class="nav-link " style="color: red;" href="yoneticiPanel.php" >Yonetici Ekleme</a>
           </li>
       </ul>
     </div>

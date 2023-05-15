@@ -1,11 +1,6 @@
 <?php
-/*
+
 include("baglanti.php");
-
-session_start();
-$kullaniciAdi = @$_SESSION['ad'];
-
-*/
 include("siteTemelYapisi.php");
 ?>
 
@@ -19,6 +14,48 @@ include("siteTemelYapisi.php");
 </head>
 <body>
 
+
+<table class="table table-bordered table-dark" style="margin-top: 30px; border-radius: 15px;">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">İsim</th>
+            <th scope="col">Soyisim</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">E-Posta</th>
+            <th scope="col">Meslek</th>
+            <th scope="col">Çocuk</th>
+
+          </tr>
+        </thead>
+        <tbody>
+        
+
+        <?php 
+
+          $data = $conn->prepare("SELECT * FROM veliler");
+          $data->execute();
+          if ($data->rowCount()) {
+            foreach ($data as $vli) {
+              ?>
+      <tr>
+                <th scope="col"><?php echo $vli['id']; ?></th>
+                <th scope="col"><?php echo $vli['ad']; ?></th>
+                <th scope="col"><?php echo $vli['soyad']; ?></th>
+                <th scope="col"><?php echo $vli['telefon']; ?></th>
+                <th scope="col"><?php echo $vli['e_posta']; ?></th>
+                <th scope="col"><?php echo $vli['meslek']; ?></th>
+                <th scope="col"><?php echo $vli['cocuk']; ?></th>
+               
+
+            </tr>
+
+            <?php  
+            }
+          }
+        ?>
+        </tbody>
+      </table>
 
 
 </body>
