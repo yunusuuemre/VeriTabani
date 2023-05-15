@@ -1,0 +1,131 @@
+CREATE DATABASE dershane;
+USE dershane;
+CREATE TABLE ogrenciler (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  ad VARCHAR(255) NOT NULL,
+  soyad VARCHAR(255) NOT NULL,
+  ogrenci_no VARCHAR(20) NOT NULL,
+  sinif VARCHAR(20) NOT NULL,
+  adres TEXT NOT NULL,
+  telefon VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE TABLE ogretmenler (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  ad VARCHAR(255) NOT NULL,
+  soyad VARCHAR(255) NOT NULL,
+  ogretmen_no VARCHAR(20) NOT NULL,
+  ders VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE TABLE dersler (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  ders_adi VARCHAR(255) NOT NULL,
+  ders_kodu VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE TABLE siniflar (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  sinif_adi VARCHAR(255) NOT NULL,
+  sinif_no VARCHAR(20) NOT NULL,
+  ogretmen_id INT(11) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (ogretmen_id) REFERENCES ogretmenler(id)
+);
+
+CREATE TABLE ders_programi (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  ders_id INT(11) NOT NULL,
+  sinif_id INT(11) NOT NULL,
+  baslangic_saati TIME NOT NULL,
+  bitis_saati TIME NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (ders_id) REFERENCES dersler(id),
+  FOREIGN KEY (sinif_id) REFERENCES siniflar(id)
+);
+CREATE TABLE ders_kayit (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  ogrenci_id INT(11) NOT NULL,
+  ders_id INT(11) NOT NULL,
+  notu INT(11) DEFAULT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (ogrenci_id) REFERENCES ogrenciler(id),
+  FOREIGN KEY (ders_id) REFERENCES dersler(id)
+);
+CREATE TABLE ders_odevleri (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  ders_id INT(11) NOT NULL,
+  aciklama TEXT NOT NULL,
+  teslim_tarihi DATE NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (ders_id) REFERENCES dersler(id)
+);
+CREATE TABLE devamsizlik (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  ogrenci_id INT(11) NOT NULL,
+  ders_id INT(11) NOT NULL,
+  devamsizlik_tarihi DATE NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (ogrenci_id) REFERENCES ogrenciler(id),
+  FOREIGN KEY (ders_id) REFERENCES dersler(id)
+);
+CREATE TABLE veliler (
+id INT(11) NOT NULL AUTO_INCREMENT,
+ad VARCHAR(255) NOT NULL,
+soyad VARCHAR(255) NOT NULL,
+telefon VARCHAR(20) NOT NULL,
+e_posta VARCHAR(255) NOT NULL,
+meslek VARCHAR(255) DEFAULT NULL,
+cocuk VARCHAR(60) NOT NULL,
+PRIMARY KEY (id)
+);
+CREATE TABLE odemeler (
+id INT(11) NOT NULL AUTO_INCREMENT,
+ogrenci_id INT(11) NOT NULL,
+ders_id INT(11) NOT NULL,
+ucret INT(11) NOT NULL,
+odeme_tarihi DATE NOT NULL,
+odeme_yapan VARCHAR(255) NOT NULL,
+odeme_yontemi VARCHAR(255) DEFAULT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (ogrenci_id) REFERENCES ogrenciler(id),
+FOREIGN KEY (ders_id) REFERENCES dersler(id)
+);
+CREATE TABLE ucretler (
+id INT(11) NOT NULL AUTO_INCREMENT,
+ders_id INT(11) NOT NULL,
+ucret INT(11) NOT NULL,
+diger_maliyetler INT(11) DEFAULT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (ders_id) REFERENCES dersler(id)
+);
+CREATE TABLE Yonetici(
+	yoneticiId int NOT NULL PRIMARY KEY,
+    yoneticiAd varchar(60) NOT NULL,
+    yoneticiSoyad varchar(60) NOT NULL,
+    yoneticiKullaniciAdi varchar(60) NOT NULL,
+    yoneticiSifre varchar(50) NOT NULL,
+    yoneticiEposta varchar(70) NOT NULL
+);
+
+CREATE TABLE Giris(
+	girisId int NOT NULL PRIMARY KEY ,
+    girisTarih date NOT NULL,
+    yonetici_id int NOT NULL,
+    FOREIGN KEY(yonetici_id) REFERENCES Yonetici(yoneticiId)
+);
+
+INSERT INTO yonetici(yoneticiId,yoneticiAd,yoneticiSoyad,yoneticiKullaniciAdi,yoneticiSifre,yoneticiEposta)
+VALUES(1,'Yunus Emre','Akyay','Emre','12345','emreImbEn@gmail.com'),(2,'Ali','Veli','Ali','ali123','aliyimBenLo@gmail.com'),(3,'Ayşe','Aydın','Ayşe','ayseyimBen','aydin-Ayse@gmail.com'),
+(4,'Beyza','Bixi','Beyza','beyza321','beyzaYim@gmail.com');
+
+INSERT INTO ogrenciler(ad,soyad,ogrenci_no,sinif,adres,telefon)
+VALUES('Emre','Akyay',393,'Mezun','Tokat Turhal ...','03432436789'),('Yusuf','Kaya',201,'12','Kocaeli İzmit ...','03218063579'),
+('Furkan','Kaya',101,'12','Kocaeli İzmit ...','05458921132'),('Eda','Nur',610,'Mezun','Mardin Dargeçit ...','04061921321');
+
+INSERT INTO ogretmenler(ad,soyad,ogretmen_no,ders) 
+VALUES('Yasin','Goban','03432431023','Türkçe'),('Emre','Akyay','03562412313','Oyun Geliştirme'),('Eda','Nur','03241231351','İngilizce'),('Ayşe','Samaroğlu','08765432104','Matematik');
+
+INSERT INTO dersler(ders_adi,ders_kodu) 
+VALUES('Türkçe','tr'),('Matematik','mat'),('Oyun Geliştirme','oyg'),('İngilizce','ing');
+
